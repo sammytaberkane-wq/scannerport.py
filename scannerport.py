@@ -32,6 +32,8 @@ def nom_service(port_test):
         return "DNS"
     elif port_test == 3306:
         return "MySQL"
+    else:
+        return "Inconnu"
 
 
 adresse_ip = input("Donne moi l'adresse IP ")
@@ -41,10 +43,20 @@ choix_mode = input("Taper 1 pour choisir des ports précis, 2 pour choisir une p
 if choix_mode == "1":
     print("Mode liste")
     listes_ports = []
-    port_a_rentrer = input("Donne moi tes différents ports à tester exemple: 22, 80, 443")
+    port_a_rentrer = input("Donne moi tes différents ports à tester exemple: 22, 80, 443 : ")
     morceau_texte = port_a_rentrer.split(",")
-    print(f"{morceau_texte}")
     
+    for morceau in morceau_texte:
+        morceau_chiffre = int(morceau)
+        listes_ports.append(morceau_chiffre)
+    print(f"{listes_ports}")
+
+    for port_mode_liste in listes_ports:
+        if tester_connexion(adresse_ip, port_mode_liste):
+            print (f"Connexion réussie { port_mode_liste } { (nom_service) (port_mode_liste) } ")
+
+
+
 elif choix_mode == "2":
     port_de_debut = int(input ("Donne moi ton port de début entre 0 et 65535 "))
     port_de_fin = int(input("Donne moi ton port de fin entre 0 et 65535 "))
