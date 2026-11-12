@@ -65,12 +65,15 @@ if choix_mode == "1":
 elif choix_mode == "2":
     port_de_debut = int(input ("Donne moi ton port de début entre 0 et 65535 "))
     port_de_fin = int(input("Donne moi ton port de fin entre 0 et 65535 "))
-    print(f"Il y a {calculer_nombre_ports (port_de_debut, port_de_fin)} port à scanner")
+    print(f"Il y a {calculer_nombre_ports (port_de_debut, port_de_fin)} ports à scanner")
 
+    nombre_ports_trouves = 0
     for port_en_test in range(port_de_debut, port_de_fin + 1):
         if tester_connexion (adresse_ip, port_en_test):
+            nombre_ports_trouves += 1
             print (f"Connexion réussi { port_en_test } { nom_service (port_en_test) } ")
-
+    if nombre_ports_trouves == 0:
+        print ("Aucun port trouvé")
 else:
     print("Choix invalide")
 
