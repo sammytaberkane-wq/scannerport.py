@@ -33,14 +33,29 @@ def nom_service(port_test):
     elif port_test == 3306:
         return "MySQL"
 
+
 adresse_ip = input("Donne moi l'adresse IP ")
-port_de_debut = int(input ("Donne moi ton port de début entre 0 et 65535 "))
-port_de_fin = int(input("Donne moi ton port de fin entre 0 et 65535 "))
+choix_mode = input("Taper 1 pour choisir des ports précis, 2 pour choisir une plage de port ")
+    
 
-print(f"Il y a {calculer_nombre_ports (port_de_debut, port_de_fin)} port à scanner")
+if choix_mode == "1":
+    print("Mode liste")
+    listes_ports = []
+    port_a_rentrer = input("Donne moi tes différents ports à tester exemple: 22, 80, 443")
+    morceau_texte = port_a_rentrer.split(",")
+    print(f"{morceau_texte}")
+    
+elif choix_mode == "2":
+    port_de_debut = int(input ("Donne moi ton port de début entre 0 et 65535 "))
+    port_de_fin = int(input("Donne moi ton port de fin entre 0 et 65535 "))
+    print(f"Il y a {calculer_nombre_ports (port_de_debut, port_de_fin)} port à scanner")
 
-for port_en_test in range(port_de_debut, port_de_fin + 1):
-    if tester_connexion (adresse_ip, port_en_test):
-        print (f"Connexion réussi { port_en_test } { nom_service (port_en_test) } ")
+    for port_en_test in range(port_de_debut, port_de_fin + 1):
+        if tester_connexion (adresse_ip, port_en_test):
+            print (f"Connexion réussi { port_en_test } { nom_service (port_en_test) } ")
+
+else:
+    print("Choix invalide")
+
 
 
