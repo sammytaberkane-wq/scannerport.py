@@ -11,6 +11,10 @@ def tester_connexion(adresse_ip, port):
         return False
 
 
+def calculer_nombre_ports(debut, fin):
+    return fin - debut + 1
+
+
 def nom_service(port_test):
     if port_test == 22:
         return "SSH"
@@ -32,6 +36,8 @@ def nom_service(port_test):
 adresse_ip = input("Donne moi l'adresse IP ")
 port_de_debut = int(input ("Donne moi ton port de début entre 0 et 65535 "))
 port_de_fin = int(input("Donne moi ton port de fin entre 0 et 65535 "))
+
+print(f"Il y a {calculer_nombre_ports (port_de_debut, port_de_fin)} port à scanner")
 
 for port_en_test in range(port_de_debut, port_de_fin + 1):
     if tester_connexion (adresse_ip, port_en_test):
