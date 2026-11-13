@@ -93,12 +93,15 @@ elif choix_mode == "2":
     print(f"Il y a {calculer_nombre_ports (port_de_debut, port_de_fin)} ports à scanner")
 
     nombre_ports_trouves = 0
-    for port_en_test in range(port_de_debut, port_de_fin + 1):
-        if tester_connexion (adresse_ip, port_en_test):
-            nombre_ports_trouves += 1
-            print (f"Connexion réussi { port_en_test } { nom_service (port_en_test) } ")
-    if nombre_ports_trouves == 0:
-        print ("Aucun port trouvé")
+    try:
+        for port_en_test in range(port_de_debut, port_de_fin + 1):
+            if tester_connexion (adresse_ip, port_en_test):
+                nombre_ports_trouves += 1
+                print (f"Connexion réussi { port_en_test } { nom_service (port_en_test) } ")
+        if nombre_ports_trouves == 0:
+            print ("Aucun port trouvé")
+    except KeyboardInterrupt:
+            print("Scan interrompu par l'utilisateur")
 else:
     print("Choix invalide")
 
