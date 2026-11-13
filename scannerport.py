@@ -82,19 +82,22 @@ if choix_mode == "1":
 
 
 elif choix_mode == "2":
-    port_de_debut = int(input ("Donne moi ton port de début entre 0 et 65535 "))
-    while not est_port_valide(port_de_debut):
-        print("Port non reconnu, recommencez")
+    try:
         port_de_debut = int(input ("Donne moi ton port de début entre 0 et 65535 "))
-    port_de_fin = int(input("Donne moi ton port de fin entre 0 et 65535 "))
-    while not est_port_valide(port_de_fin):
-        print("Port non reconnu, recommencez")
+        while not est_port_valide(port_de_debut):
+            print("Port non reconnu, recommencez")
+            port_de_debut = int(input ("Donne moi ton port de début entre 0 et 65535 "))
         port_de_fin = int(input("Donne moi ton port de fin entre 0 et 65535 "))
-    while port_de_fin < port_de_debut:
-        print("Le port de fin doit être supérieur ou égal au port de début")
-        port_de_fin = int(input("Donne moi ton port de fin entre 0 et 65535 "))
-    print(f"Il y a {calculer_nombre_ports (port_de_debut, port_de_fin)} ports à scanner")
-
+        while not est_port_valide(port_de_fin):
+            print("Port non reconnu, recommencez")
+            port_de_fin = int(input("Donne moi ton port de fin entre 0 et 65535 "))
+        while port_de_fin < port_de_debut:
+            print("Le port de fin doit être supérieur ou égal au port de début")
+            port_de_fin = int(input("Donne moi ton port de fin entre 0 et 65535 "))
+        print(f"Il y a {calculer_nombre_ports (port_de_debut, port_de_fin)} ports à scanner")
+    except ValueError:
+        print("Vous devez entrer un nombre entier")
+        sys.exit()
     nombre_ports_trouves = 0
     try:
         for port_en_test in range(port_de_debut, port_de_fin + 1):
