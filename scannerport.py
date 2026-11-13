@@ -1,4 +1,5 @@
-import socket 
+import socket
+import sys
 
 def tester_connexion(adresse_ip, port):
     Socket = socket.socket (socket.AF_INET, socket.SOCK_STREAM )
@@ -45,6 +46,11 @@ def est_port_valide(port):
 
 
 adresse_ip = input("Donne moi l'adresse IP ")
+try:
+    socket.gethostbyname(adresse_ip)
+except socket.gaierror:
+    print("Adresse IP introuvable")
+    sys.exit()
 choix_mode = input("Taper 1 pour choisir des ports précis, 2 pour choisir une plage de port ")
  
 
