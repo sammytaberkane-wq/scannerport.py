@@ -66,13 +66,15 @@ if choix_mode == "1":
     print(f"{listes_ports}")
 
     nombre_ports_trouves = 0
-
-    for port_mode_liste in listes_ports:
-        if tester_connexion(adresse_ip, port_mode_liste):
-            nombre_ports_trouves += 1
-            print (f"Connexion réussie { port_mode_liste } { nom_service (port_mode_liste) } ")
-    if nombre_ports_trouves == 0:
-        print ("Aucun port trouvé")
+    try:
+        for port_mode_liste in listes_ports:
+            if tester_connexion(adresse_ip, port_mode_liste):
+                nombre_ports_trouves += 1
+                print (f"Connexion réussie { port_mode_liste } { nom_service (port_mode_liste) } ")
+        if nombre_ports_trouves == 0:
+            print ("Aucun port trouvé")
+    except KeyboardInterrupt:
+        print("Scan interrompu par l'utilisateur")
 
 
 
