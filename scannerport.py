@@ -61,8 +61,11 @@ if choix_mode == "1":
     morceau_texte = port_a_rentrer.split(",")
     
     for morceau in morceau_texte:
-        morceau_chiffre = int(morceau)
-        listes_ports.append(morceau_chiffre)
+        try:
+            morceau_chiffre = int(morceau)
+            listes_ports.append(morceau_chiffre)
+        except ValueError:
+            print(f"{morceau} n'est pas un port valide, il est ignoré")
     print(f"{listes_ports}")
 
     nombre_ports_trouves = 0
