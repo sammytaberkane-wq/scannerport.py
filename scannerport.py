@@ -45,6 +45,14 @@ def est_port_valide(port):
         return True
 
 
+def garde_port_valide (ports_a_verifier):
+    port_valides = []
+    for chaque_port in ports_a_verifier:
+        if est_port_valide(chaque_port):
+            port_valides.append(chaque_port)
+    return port_valides
+
+
 adresse_ip = input("Donne moi l'adresse IP ")
 try:
     socket.gethostbyname(adresse_ip)
@@ -66,14 +74,16 @@ if choix_mode == "1":
             listes_ports.append(morceau_chiffre)
         except ValueError:
             print(f"{morceau} n'est pas un port valide, il est ignoré")
-    print(f"{listes_ports}")
+        ports_a_scanner = garde_port_valide(listes_ports)
+    print(f"{ports_a_scanner}")
 
     nombre_ports_trouves = 0
     try:
-        for port_mode_liste in listes_ports:
+        for port_mode_liste in ports_a_scanner:
             if tester_connexion(adresse_ip, port_mode_liste):
                 nombre_ports_trouves += 1
                 print (f"Connexion réussie { port_mode_liste } { nom_service (port_mode_liste) } ")
+    
         if nombre_ports_trouves == 0:
             print ("Aucun port trouvé")
     except KeyboardInterrupt:
