@@ -67,6 +67,7 @@ if choix_mode == "1":
     listes_ports = []
     port_a_rentrer = input("Donne moi tes différents ports à tester exemple: 22, 80, 443 : ")
     morceau_texte = port_a_rentrer.split(",")
+
     
     for morceau in morceau_texte:
         try:
@@ -75,18 +76,25 @@ if choix_mode == "1":
         except ValueError:
             print(f"{morceau} n'est pas un port valide, il est ignoré")
         ports_a_scanner = garde_port_valide(listes_ports)
+
     print(f"{ports_a_scanner}")
+
+
 
     nombre_ports_trouves = 0
     try:
         for port_mode_liste in ports_a_scanner:
             if tester_connexion(adresse_ip, port_mode_liste):
                 nombre_ports_trouves += 1
+
                 print (f"Connexion réussie { port_mode_liste } { nom_service (port_mode_liste) } ")
     
+
         if nombre_ports_trouves == 0:
+
             print ("Aucun port trouvé")
     except KeyboardInterrupt:
+
         print("Scan interrompu par l'utilisateur")
 
 
@@ -95,25 +103,39 @@ elif choix_mode == "2":
     try:
         port_de_debut = int(input ("Donne moi ton port de début entre 0 et 65535 "))
         while not est_port_valide(port_de_debut):
+
             print("Port non reconnu, recommencez")
+
             port_de_debut = int(input ("Donne moi ton port de début entre 0 et 65535 "))
         port_de_fin = int(input("Donne moi ton port de fin entre 0 et 65535 "))
         while not est_port_valide(port_de_fin):
+
             print("Port non reconnu, recommencez")
+
             port_de_fin = int(input("Donne moi ton port de fin entre 0 et 65535 "))
         while port_de_fin < port_de_debut:
+
             print("Le port de fin doit être supérieur ou égal au port de début")
+
             port_de_fin = int(input("Donne moi ton port de fin entre 0 et 65535 "))
+
         print(f"Il y a {calculer_nombre_ports (port_de_debut, port_de_fin)} ports à scanner")
+
     except ValueError:
+
         print("Vous devez entrer un nombre entier")
+
         sys.exit()
+
+
     nombre_ports_trouves = 0
     try:
         for port_en_test in range(port_de_debut, port_de_fin + 1):
             if tester_connexion (adresse_ip, port_en_test):
                 nombre_ports_trouves += 1
+
                 print (f"Connexion réussi { port_en_test } { nom_service (port_en_test) } ")
+                
         if nombre_ports_trouves == 0:
             print ("Aucun port trouvé")
     except KeyboardInterrupt:
